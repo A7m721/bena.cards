@@ -2,7 +2,7 @@
    Only databaseURL is needed (the game talks to the database over plain HTTPS, no SDK).
    These values are public identifiers, not secrets. What protects your data is the Database Rules (see FIREBASE_RULES.md). */
 const FIREBASE_CONFIG={
-  apiKey:"AIzaSyCDc2HRjPRgUOacxlVO5oYNcgBbp5urnnQ",
+  apiKey:"AIzaSyBmsx0m2KqUSG2FYW6JQ1eTsS28-US7ZFY",
   authDomain:"store-3217e.firebaseapp.com",
   databaseURL:"https://store-3217e-default-rtdb.europe-west1.firebasedatabase.app",
   projectId:"store-3217e"
