@@ -1,0 +1,22 @@
+/* Color themes: classic (default blue), dark, light.
+   Cards stay cream in every theme; only the page background and the text sitting on it change. */
+:root{
+  --bg:#3b5bfd;
+  --on-bg:#ffffff;
+  --dots:rgba(255,255,255,.14);
+  --h1sh:var(--ink);
+  --bar-bg:rgba(255,255,255,.3);
+}
+:root[data-theme="dark"]{
+  --bg:#0f1030;
+  --on-bg:#ffffff;
+  --dots:rgba(255,255,255,.07);
+  --bar-bg:rgba(255,255,255,.2);
+}
+:root[data-theme="light"]{
+  --bg:#eceeff;
+  --on-bg:#14143a;
+  --dots:rgba(20,20,58,.08);
+  --h1sh:#ff6fb1;
+  --bar-bg:rgba(20,20,58,.12);
+}
