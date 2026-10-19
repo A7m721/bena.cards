@@ -103,7 +103,7 @@ function fbSync(){
   if(!R||R.mode!=='fb')return;
   const t=RM.tree||{},seats=t.seats||{},me=seats[R.idx],pe=seats[1-R.idx];let changed=false;
   if(me&&typeof me.ts==='number'&&RM.hbSeen!==me.ts){RM.hbSeen=me.ts;RM.off=me.ts-Date.now()}
-  const alive=!!(pe&&pe.pid&&typeof pe.ts==='number'&&(Date.now()+RM.off-pe.ts)<45000),was=R.open;
+  const alive=!!(pe&&pe.pid&&typeof pe.ts==='number'&&(Date.now()+RM.off-pe.ts)<120000),was=R.open;
   if(pe){R.nms[1-R.idx]=String(pe.nm||'').slice(0,24)||T('player');R.gd[1-R.idx]=pe.gd==='f'?'f':'m'}
   R.nms[R.idx]=myName();R.gd[R.idx]=myG;R.open=alive;
   /* shared game state */
@@ -164,7 +164,7 @@ function bindRoom(){
   $('rcode').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();fbJoin($('rcode').value)}});
   $('rinv').addEventListener('click',inviteRoom);
   $('rleave').addEventListener('click',fbLeave);
-  if(document.addEventListener)document.addEventListener('visibilitychange',()=>{if(!document.hidden&&R&&R.mode==='fb'){fbHeartbeat();if(!RM.es||RM.es.readyState===2)fbStream()}});
+  if(document.addEventListener)document.addEventListener('visibilitychange',()=>{if(!document.hidden&&R&&R.mode==='fb'){fbHeartbeat();fbStream()}});
 }
 /* called once at start-up: ?room=CODE in the link, or the room this browser was in before */
 function roomAutoJoin(){
