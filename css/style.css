@@ -180,3 +180,4 @@ textarea:focus-visible{outline:3px solid var(--pink)}
 #home #onl{width:100%}
 #home .lobby{margin-top:6px}
 #home .opts{margin-top:16px}
+#home .opts .gm{margin-bottom:0}
