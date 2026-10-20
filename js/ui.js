@@ -1,5 +1,5 @@
 /* Rendering: everything on screen is derived from the state S (+ local flags). */
-let lastKey='',lastSet='',endV=-1,prevS=null,lvShown='',nKey='',tmKey='',tmStart=0,tmFired='',tmTick=-1,anT=null;
+let lastKey='',lastSet='',endV=-1,prevS=null,lvShown='',nKey='',tmKey='',tmStart=0,tmFired='',tmTick=-1,anT=null,rKey='';
 const card=$('card'),nx=$('nx'),sk=$('sk');
 
 /* ---- home screen controls ---- */
@@ -41,7 +41,7 @@ function render(){
   $('app').classList.toggle('ingame',S.go);
   $('home').hidden=S.go;$('gamescr').hidden=!S.go;$('tagline').hidden=S.go;
   const hostEl=S.go?$('dbody'):$('ctlHome');if($('ctl').parentNode!==hostEl)hostEl.appendChild($('ctl'));
-  $('menu').hidden=!S.go;$('rst').hidden=!S.go;$('menu').textContent=T('menu')+(R&&R.open?' 🟢':'');
+  $('menu').hidden=false;$('rst').hidden=!S.go;$('menu').textContent=T('menu')+(R&&R.open?' 🟢':'');
 
   /* players */
   $('players').classList.toggle('idle',!S.go);
@@ -57,7 +57,7 @@ function render(){
   if(!S.go){
     $('cqp').hidden=!!MS;cqRender();syncChips();
     $('pdesc').textContent=T('pd_'+pkE());$('start').disabled=!!R&&!R.open;
-    $('fbj').hidden=!MS;if(MS)$('fb').hidden=false;
+    
     $('tmw').hidden=true;tmKey='';prevS=null;save();return;
   }
 
@@ -79,6 +79,8 @@ function render(){
   if(newLv&&lvShown!==key){lvShown=key;rain();play('level')}
   const myTurnNow=!!(R&&R.open&&S.turn===R.idx&&!S.fl),nkey=key+':'+S.turn;
   if(myTurnNow&&nKey!==nkey){nKey=nkey;ping()}
+  const readNow=!!(R&&R.open&&rdFlow(it)&&S.dn&&S.turn!==R.idx),rkey=key+':rd';
+  if(readNow&&rKey!==rkey){rKey=rkey;ping('readTitle')}
 
   card.classList.toggle('flip',S.fl);
   const tg=$('tg');let fArEn=null;
@@ -91,7 +93,9 @@ function render(){
 
   const qOpen=!isJ&&S.fl&&!S.dn&&!S.sx;
   sk.disabled=!(qOpen&&S.fo==null&&isA);sk.textContent=TX.sk(S.turn);
-  nx.disabled=!(ph==='next'&&isA);nx.textContent=S.i>=d.length-1?T('nxEnd'):T('nx');
+  const rd=rdFlow(it),rdNow=rd&&ph==='next';
+  nx.hidden=rdNow&&isA&&!!R;   /* online: the writer waits, the reader taps "read" */
+  nx.disabled=!(ph==='next'&&(rd?isBn:isA));nx.textContent=rdNow?T('readDone'):(S.i>=d.length-1?T('nxEnd'):T('nx'));
   $('tk').hidden=!(qOpen&&isA&&S.tk[S.turn]>0);$('tk').textContent=TX.tk(S.turn);
   $('sw').hidden=!(qOpen&&isA&&S.sw[S.turn]>0&&S.fo==null);$('sw').textContent=TX.sw(S.turn,1-S.turn);
   $('tkr').hidden=$('tk').hidden&&$('sw').hidden;
@@ -116,7 +120,7 @@ function render(){
   }
   prevS=cs;
 
-  $('hint').textContent=S.fl?TX.hint({ph,isJ,isA,isBn,fo:S.fo,tm:S.tm,sx:S.sx,who,a:S.turn,b:1-S.turn,dnLabel:dnb.textContent}):'';
+  $('hint').textContent=S.fl?TX.hint({ph,isJ,isA,isBn,fo:S.fo,tm:S.tm,sx:S.sx,who,a:S.turn,b:1-S.turn,dnLabel:dnb.textContent,rd}):'';
   save();
 }
 
