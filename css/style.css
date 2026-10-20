@@ -144,9 +144,9 @@ textarea:focus-visible{outline:3px solid var(--pink)}
 @keyframes drin{from{transform:translateX(-100%)}}
 .dhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:18px}
 .dx{border:3px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:12px;width:38px;height:38px;font-size:16px;cursor:pointer}
-#dbody .opts{justify-content:flex-start;margin-top:12px}
-#dbody #rst{margin-top:6px;width:100%}
-#dbody .hint2{color:var(--ink)}
+#drawer .opts{justify-content:flex-start;margin-top:12px}
+#drawer #rst{margin-top:6px;width:100%}
+#drawer .hint2{color:var(--ink)}
 #ctlHome .hint2{color:var(--on-bg)}
 .intro{position:fixed;inset:0;background:rgba(10,10,40,.7);z-index:40;display:grid;place-items:center;padding:18px}
 .introc{position:relative;background:var(--card);color:var(--ink);border:4px solid var(--ink);border-radius:26px;box-shadow:7px 7px 0 var(--ink);padding:22px 20px;max-width:400px;max-height:88vh;overflow:auto;text-align:start}
@@ -179,5 +179,7 @@ textarea:focus-visible{outline:3px solid var(--pink)}
 /* second choice: online play, full width and outlined by the paper style */
 #home #onl{width:100%}
 #home .lobby{margin-top:6px}
-#home .opts{margin-top:16px}
-#home .opts .gm{margin-bottom:0}
+/* home screen: no player-name bar (it appears once the game starts) */
+#players.idle{display:none}
+/* room for the always-visible settings button */
+main#app{padding-top:40px}
