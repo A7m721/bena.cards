@@ -9,7 +9,7 @@ ar:{
  docTitle:'كروت بينا 💬',title:'كروت بينا 💬',tagline:'أسئلة وتحديات تقرّبكم من بعض وتضحّككم',
  p1:'اللاعب الأول',p2:'اللاعب التاني',phName:'اكتب الاسم',you:' (أنت)',player:'لاعب',waitOther:'بنستنى اللاعب التاني',avatarAria:'تبديل الشخصية (ولد/بنت)',
  packsT:'اختاروا نوع اللعبة',intensT:'مستوى الجرأة',
- pk_gen:'🎲 عام',pk_friends:'👫 أصحاب',pk_couples:'💑 أزواج',pk_family:'  👨‍👩‍👧   عائلة ',pk_work:'💼 زملاء',pk_quick:'⚡ سريعة',
+ pk_gen:'🎲 عام',pk_friends:'👫 أصحاب',pk_couples:'💑 أزواج',pk_family:'👨‍👩‍👧 عائلة',pk_work:'💼 زملاء',pk_quick:'⚡ سريعة',
  pd_gen:'مزيج من كل حاجة',pd_friends:'ذكريات وضحك بين الأصحاب',pd_couples:'أسئلة تقرّبكم من بعض',pd_family:'عن البيت والعيلة',pd_work:'عن الشغل والدراسة',pd_quick:'٢٠ كارت وعدّاد ١٥ ثانية',
  it_light:'🙂 خفيف',it_grad:'🔥 متدرّج',it_bold:'🌶️ جريء',
  start:'ابدأ اللعب 🎴',onl:'🌍 العبوا من مكانين مختلفين',share:'📤 مشاركة ودعوة',how:'❓ طريقة اللعب',
@@ -30,13 +30,13 @@ ar:{
  recSkip:(w)=>`🛡️ ${w} اتخطى السؤال`,recForfeit:(w,f)=>`😈 ${w} نفّذ حكم: ${f}`,recVerbal:'(جاوب شفوي)',recForfeitLbl:'حكم: ',
  memoT:'كارت الذكرى 💌',memoSave:'⬇️ تحميل الصورة',memoShare:'📤 مشاركة',memoName:'كروت بينا',memoCards:'كروت اتلعبت',memoAns:'إجابات',memoFor:'أحكام',memoMagic:'كروت سحرية',memoMade:'اتعمل بالحب في كروت بينا',memoFail:'مقدرناش نعمل الصورة',
  shareTitle:'كروت بينا',shareText:'تعالى نلعب "كروت بينا" 🎴 أسئلة وتحديات تقرّبنا من بعض وتضحّكنا:',linkCopied:'اتنسخ رابط اللعبة ✔',
- turnTitle:'🔔 دورك! — كروت بينا',
+ turnTitle:'🔔 دورك! — كروت بينا',readTitle:'🔔 إجابة جديدة — كروت بينا',readDone:'تم القراءة ✅',
  // lobby
  roomNote:'اعملوا غرفة وابعتوا الكود أو الرابط لصاحبك. ده كل اللي محتاجينه.',roomNew:'➕ غرفة جديدة',roomCodePh:'كود الغرفة',roomJoin:'دخول',
  roomIn:(c,o)=>`🟢 الغرفة ${c.toUpperCase()} • ${o?'الاتنين موجودين':'بنستنى اللاعب التاني'}`,roomInvite:'📤 ابعت الدعوة',roomLeave:'خروج من الغرفة',
  roomInviteText:(c)=>`تعالى نلعب "كروت بينا" 🎴 كود الغرفة: ${c.toUpperCase()}`,roomMaking:'بنعمل الغرفة...',roomJoining:'بندخل الغرفة...',
  roomNone:'مفيش غرفة بالكود ده. اتأكد من الكود.',roomFull:'الغرفة فيها لاعبين اتنين بالفعل.',
- roomFail:'مقدرناش نوصل لسيرفر الغرفة. اتأكد من الإنترنت، أو جرّبوا الطريقة اليدوية تحت.',roomDenied:'سيرفر الغرفة رفض الطلب (قواعد Firebase). جرّبوا الطريقة اليدوية تحت.',
+ roomFail:'مقدرناش نوصل لسيرفر الغرفة. اتأكد من الإنترنت وجرّب تاني.',roomDenied:'سيرفر الغرفة رفض الطلب (قواعد Firebase). اتأكد إن القواعد اتنشرت.',
  roomBad:'الكود لازم يكون من ٤ لـ ١٠ حروف إنجليزي أو أرقام.',roomWeak:'الاتصال ضعيف... بنحاول نرجع.',manualSum:'الطريقة اليدوية (لو الغرفة مش شغالة)',
  lobNote:'من غير أي حسابات. هتبعتوا لبعض كودين بس مرة واحدة على واتساب.',myName:'اسمك',bh:'أنا هبدأ',bg:'صاحبي بعتلي كود',
  hStep1:'١) انسخ الكود وابعته لصاحبك:',copyCode:'نسخ الكود',hStep2:'٢) لما يرجعلك كود الرد، الصقه هنا:',connect:'اتصل',
@@ -78,12 +78,12 @@ en:{
  recSkip:(w)=>`🛡️ ${w} skipped the question`,recForfeit:(w,f)=>`😈 ${w} did a forfeit: ${f}`,recVerbal:'(answered out loud)',recForfeitLbl:'Forfeit: ',
  memoT:'Memory card 💌',memoSave:'⬇️ Download image',memoShare:'📤 Share',memoName:'Cards Between Us',memoCards:'cards played',memoAns:'answers',memoFor:'forfeits',memoMagic:'magic cards',memoMade:'Made with love in Cards Between Us',memoFail:'Could not create the image',
  shareTitle:'Cards Between Us',shareText:'Come play "Cards Between Us" 🎴 questions and dares that bring us closer and make us laugh:',linkCopied:'Game link copied ✔',
- turnTitle:'🔔 Your turn! — Cards Between Us',
+ turnTitle:'🔔 Your turn! — Cards Between Us',readTitle:'🔔 New answer — Cards Between Us',readDone:'Read ✅',
  roomNote:'Create a room and send the code or link to your friend. That is all you need.',roomNew:'➕ New room',roomCodePh:'Room code',roomJoin:'Join',
  roomIn:(c,o)=>`🟢 Room ${c.toUpperCase()} • ${o?'both players here':'waiting for the other player'}`,roomInvite:'📤 Send invite',roomLeave:'Leave room',
  roomInviteText:(c)=>`Come play "Cards Between Us" 🎴 Room code: ${c.toUpperCase()}`,roomMaking:'Creating the room...',roomJoining:'Joining the room...',
  roomNone:'There is no room with this code. Check the code.',roomFull:'This room already has two players.',
- roomFail:'Could not reach the room server. Check your internet, or try the manual method below.',roomDenied:'The room server refused the request (Firebase rules). Try the manual method below.',
+ roomFail:'Could not reach the room server. Check your internet and try again.',roomDenied:'The room server refused the request (Firebase rules). Make sure the rules are published.',
  roomBad:'The code must be 4 to 10 letters or numbers.',roomWeak:'The connection is weak... trying to recover.',manualSum:'Manual method (if rooms do not work)',
  lobNote:'No accounts needed. You will send each other two codes once, for example on WhatsApp.',myName:'Your name',bh:'I will start',bg:'My friend sent me a code',
  hStep1:'1) Copy the code and send it to your friend:',copyCode:'Copy code',hStep2:'2) When you get the reply code back, paste it here:',connect:'Connect',
@@ -124,11 +124,11 @@ const TX={
   const h=[];
   if(LANG==='en'){
    if(c.ph==='answer')h.push(c.isJ?(c.isA?'Read the card, then tap "'+c.dnLabel+'".':'Waiting for '+c.who+'...'):c.isA?(c.fo!=null?'Do the forfeit first, then tap "Forfeit done".':(c.tm?'Answer before the time runs out ⏱️ (or pick a forfeit).':'Answer the question or pick a forfeit to continue.')):'Waiting for '+c.who+' to answer or do the forfeit...');
-   else if(c.ph==='next'){if(c.sx)h.push('🛡️ '+c.who+' used immunity and skipped the question.');h.push(c.isA?'Nice! Tap "Next turn" ✔':'Waiting for '+c.who+' to continue...')}
+   else if(c.ph==='next'){if(c.sx)h.push('🛡️ '+c.who+' used immunity and skipped the question.');if(c.rd)h.push(c.isA?'Waiting for the other player to read your answer...':'Read '+c.who+"'s answer, then tap Read to take your turn.");else h.push(c.isA?'Nice! Tap "Next turn" ✔':'Waiting for '+c.who+' to continue...')}
    return h.join('  •  ')}
   const a=c.a,up=G(c.b,'استنى','استني');
   if(c.ph==='answer')h.push(c.isJ?(c.isA?G(a,'اقرا','اقري')+' الكارت وبعدين '+G(a,'دوس','دوسي')+' "'+c.dnLabel.replace(' ✅','')+'".':up+' '+c.who+'...'):c.isA?(c.fo!=null?G(a,'نفّذ','نفّذي')+' الحكم الأول وبعدين '+G(a,'دوس','دوسي')+' "نفّذت الحكم".':(c.tm?G(a,'جاوب','جاوبي')+' قبل ما الوقت يخلص ⏱️ (أو '+G(a,'اختار','اختاري')+' الحكم).':G(a,'جاوب','جاوبي')+' على السؤال أو '+G(a,'اختار','اختاري')+' الحكم عشان '+G(a,'تكمل','تكملي')+'.')):up+' '+c.who+' '+G(a,'يجاوب','تجاوب')+' أو '+G(a,'ينفّذ','تنفّذ')+' الحكم...');
-  else if(c.ph==='next'){if(c.sx)h.push('🛡️ '+c.who+' '+G(a,'استخدم','استخدمت')+' الحصانة و'+G(a,'تخطّى','تخطّت')+' السؤال.');h.push(c.isA?'تمام! '+G(a,'دوس','دوسي')+' "الدور اللي بعده" ✔':up+' '+c.who+' '+G(a,'يكمل','تكمل')+'...')}
+  else if(c.ph==='next'){if(c.sx)h.push('🛡️ '+c.who+' '+G(a,'استخدم','استخدمت')+' الحصانة و'+G(a,'تخطّى','تخطّت')+' السؤال.');if(c.rd)h.push(c.isA?G(a,'استنى','استني')+' '+G(c.b,'التاني يقرا','التانية تقرا')+' إجابتك '+G(c.b,'ويدوس','وتدوس')+' "تم القراءة" ✔':G(c.b,'اقرا','اقري')+' إجابة '+c.who+' وبعدين '+G(c.b,'دوس','دوسي')+' "تم القراءة" عشان يبقى دورك ✔');else h.push(c.isA?'تمام! '+G(a,'دوس','دوسي')+' "الدور اللي بعده" ✔':up+' '+c.who+' '+G(a,'يكمل','تكمل')+'...')}
   return h.join('  •  ')}
 };
 
