@@ -4,7 +4,16 @@ function bindGame(){
   sk.addEventListener('click',()=>{const it=cur();if(canAct()&&it&&it.j===undefined&&S.fl&&S.fo==null&&!S.dn&&!S.sx)act({fo:S.fc,fc:S.fc+1})});
   $('tk').addEventListener('click',()=>{const it=cur();if(!canAct()||!it||it.j!==undefined||!S.fl||S.dn||S.sx||S.tk[S.turn]<1)return;const tk=[...S.tk];tk[S.turn]--;act({sx:true,dn:true,tk})});
   $('sw').addEventListener('click',()=>{const it=cur();if(!canAct()||!it||it.j!==undefined||!S.fl||S.dn||S.sx||S.fo!=null||S.sw[S.turn]<1)return;const sw=[...S.sw];sw[S.turn]--;act({sw,turn:1-S.turn})});
-  nx.addEventListener('click',()=>{if(!canAct()||phase()!=='next')return;const n=itemsOf().length;if(S.i>=n-1)act({i:S.i+1});else act({i:S.i+1,turn:S.dbl?S.turn:1-S.turn,dbl:false,...FR()})});
+  nx.addEventListener('click',()=>{
+    if(phase()!=='next')return;
+    const rd=rdFlow(cur());
+    if(!(rd?canOther():canAct()))return;   /* online question: the reader (the other player) taps; otherwise the player whose turn it is */
+    const n=itemsOf().length;
+    if(S.i>=n-1){act({i:S.i+1});return}
+    const nt=S.dbl?S.turn:1-S.turn;
+    if(rd)nKey=S.sd+':'+(S.i+1)+':'+nt;   /* no "your turn" bell for the player who just tapped */
+    act({i:S.i+1,turn:nt,dbl:false,...FR()});
+  });
   $('dn').addEventListener('click',()=>{
     if(!canAct()||phase()!=='answer')return;clearTimeout(anT);send({t:'an',k:lastKey,a:AN});const it=cur();
     if(it.j!==undefined){const tk=[...S.tk],sw=[...S.sw];if(it.j===0)tk[S.turn]++;if(it.j===1)sw[S.turn]++;act({dn:true,tk,sw,dbl:it.j===3})}else act({dn:true});
