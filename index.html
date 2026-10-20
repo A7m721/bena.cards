@@ -67,46 +67,8 @@
             <div class="row"><button class="sm" id="rinv" data-i18n="roomInvite"></button><button class="sm" id="rleave" data-i18n="roomLeave"></button></div>
           </div>
           <div class="st" id="rmsg" role="status"></div>
-          <details class="manual" id="manual">
-            <summary data-i18n="manualSum"></summary>
-            <p data-i18n="lobNote"></p>
-                    <div class="row"><button class="sm" id="bh" data-i18n="bh"></button><button class="sm" id="bg" data-i18n="bg"></button></div>
-          <div id="hp" hidden>
-            <p data-i18n="hStep1"></p>
-            <textarea id="hc" readonly data-i18n-aria="codeAria"></textarea>
-            <div class="row"><button class="sm" id="ch" data-i18n="copyCode"></button></div>
-            <p data-i18n="hStep2"></p>
-            <textarea id="ha" data-i18n-aria="replyAria"></textarea>
-            <div class="row"><button class="sm" id="cn" data-i18n="connect"></button></div>
-          </div>
-          <div id="gp" hidden>
-            <p data-i18n="gStep1"></p>
-            <textarea id="gi" data-i18n-aria="codeAria"></textarea>
-            <div class="row"><button class="sm" id="mkr" data-i18n="mkr"></button></div>
-            <p data-i18n="gStep2"></p>
-            <textarea id="gv" readonly data-i18n-aria="replyAria"></textarea>
-            <div class="row"><button class="sm" id="cg" data-i18n="copyCode"></button></div>
-          </div>
-          <div class="st" id="st" role="status"></div>
-          <div class="fbx" id="fb" hidden>
-            <p data-i18n="fbText"></p>
-            <div class="row"><input id="fbc" maxlength="10" dir="ltr" data-i18n-ph="fbPh" data-i18n-aria="fbPh"><button class="sm" id="fbg" data-i18n="fbGo"></button></div>
-            <div class="row" id="fbj" hidden><input id="fbn" type="number" min="1" data-i18n-ph="fbNum" data-i18n-aria="fbNum"><button class="sm" id="fbm" data-i18n="fbJump"></button></div>
-          </div>
-          </details>
         </div>
       </div>
-      <div class="opts" style="margin-top:14px">
-        <label class="gm"><input type="checkbox" id="tm" checked> <span data-i18n="timerOpt"></span></label>
-        <button type="button" class="gm" id="snd"></button>
-        <button type="button" class="gm" id="langb"></button>
-        <button type="button" class="gm" id="themeb"></button>
-        <button type="button" class="gm" id="share" data-i18n="share"></button>
-        <button type="button" class="gm" id="inst" hidden data-i18n="inst"></button>
-        <button type="button" class="gm" id="how" data-i18n="how"></button>
-      </div>
-      <p class="hint2" id="ihelp" hidden data-i18n="iosHelp"></p>
-      <button class="btn alt" id="rst" hidden data-i18n="rst"></button>
     </div></div>
   </section>
 
@@ -152,6 +114,17 @@
 <aside class="drawer" id="drawer" hidden>
   <div class="dhead"><b data-i18n="settings"></b><button class="dx" id="dx" data-i18n-aria="close">✕</button></div>
   <div id="dbody"></div>
+  <div class="opts">
+    <label class="gm"><input type="checkbox" id="tm" checked> <span data-i18n="timerOpt"></span></label>
+    <button type="button" class="gm" id="snd"></button>
+    <button type="button" class="gm" id="langb"></button>
+    <button type="button" class="gm" id="themeb"></button>
+    <button type="button" class="gm" id="share" data-i18n="share"></button>
+    <button type="button" class="gm" id="inst" hidden data-i18n="inst"></button>
+    <button type="button" class="gm" id="how" data-i18n="how"></button>
+  </div>
+  <p class="hint2" id="ihelp" hidden data-i18n="iosHelp"></p>
+  <button class="btn alt" id="rst" hidden data-i18n="rst"></button>
 </aside>
 
 <!-- how to play -->
@@ -176,6 +149,7 @@
 <script src="js/data/questions.js"></script>
 <script src="js/data/forfeits.js"></script>
 <script src="js/data/fem.js"></script>
+<script src="js/data/more.js"></script>
 <script src="js/config.js"></script>
 <script src="js/i18n.js"></script>
 <script src="js/util.js"></script>
