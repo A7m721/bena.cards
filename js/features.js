@@ -18,7 +18,7 @@ function showIntro(){$('intro').hidden=false;if($('ix').focus)$('ix').focus()}
 function closeIntro(){$('intro').hidden=true;try{localStorage.setItem('bena_intro','1')}catch(e){}}
 
 /* ---- "your turn" notification (two-place play) ---- */
-function ping(){play('bell');try{if(navigator.vibrate)navigator.vibrate([150,80,150])}catch(e){}if(document.hidden)document.title=T('turnTitle')}
+function ping(k){play('bell');try{if(navigator.vibrate)navigator.vibrate([150,80,150])}catch(e){}if(document.hidden)document.title=T(k||'turnTitle')}
 
 /* ---- share / invite ---- */
 async function shareInvite(){
