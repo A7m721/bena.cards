@@ -36,7 +36,9 @@ function clean(o){
     cq:(Array.isArray(o.cq)?o.cq.slice(0,20):[]).map(x=>Array.isArray(x)&&typeof x[0]==='string'&&x[0].trim()?[x[0].slice(0,140),[0,1,2].includes(x[1])?x[1]:1]:null).filter(Boolean)};
 }
 function act(p){S={...S,...p,v:S.v+1};render();send({t:'st',st:S})}
-const newSd=()=>MS?hash(MS):rnd();
+/* sd = series*1000 + game number. A new game keeps the series (same shuffle of the bank) and moves to the next game number,
+   so it takes the next slice of questions instead of a random overlap. Still a plain number, so nothing else changes. */
+const newSd=()=>Math.floor(S.sd/1000)*1000+(S.sd%1000+1)%1000;
 
 /* ---- deck builder: same state => same deck on both devices ---- */
 const pkE=()=>MS?'gen':S.pk, itE=()=>MS?'grad':S.it;
@@ -46,16 +48,21 @@ function drawFor(){
   else if(itE()==='bold')g=[0,g[1]+Math.ceil(g[0]/2),g[2]+Math.floor(g[0]/2)];
   return g;
 }
-const QA=()=>[...QB.filter(q=>!q.p||q.p===pkE()),...(MS?[]:S.cq.map(x=>({c:'u',l:x[1],p:'',ar:x[0],en:x[0]})))];
+/* two places (room, manual link or shared code): hide dares that need acting, drawing or singing */
+const olE=()=>!!(R||MS);
+const ACT_RE=/^(قلّد|ارسم|اعمل|اختار أغنية|اخترعوا|اتكلم بصوت|مثّل|غنّي)/;
+const QA=()=>[...QB.filter(q=>(!q.p||q.p===pkE())&&!(olE()&&q.c==='c'&&ACT_RE.test(q.ar))),...(MS?[]:S.cq.map(x=>({c:'u',l:x[1],p:'',ar:x[0],en:x[0]})))];
 function itemsOf(){
   const QQ=QA(),draw=drawFor(),pk=pkE(),en=[0,1,2].filter(x=>draw[x]>0),jp=sh(4,S.sd+99);
+  const SS=Math.floor(S.sd/1000),GN=S.sd%1000;   /* series seed, game number */
+  const part=(arr,n)=>{n=Math.min(n,arr.length);return Array.from({length:n},(_,i)=>arr[(GN*n+i)%arr.length])};   /* game GN takes the GN-th slice, wrapping around */
   const lvOf=q=>en.includes(q.l)?q.l:en.reduce((b,x)=>Math.abs(x-q.l)<Math.abs(b-q.l)?x:b,en[0]);
   const qs=en.flatMap(x=>{
-    const packK=pk==='gen'||pk==='quick'?[]:sh(QQ.length,S.sd+x*11).filter(k=>QQ[k].p===pk&&QQ[k].l===x);
-    const baseK=sh(QQ.length,S.sd+x*13).filter(k=>!QQ[k].p&&QQ[k].c!=='u'&&QQ[k].l===x);
+    const packK=pk==='gen'||pk==='quick'?[]:sh(QQ.length,SS+x*11).filter(k=>QQ[k].p===pk&&QQ[k].l===x);
+    const baseK=sh(QQ.length,SS+x*13).filter(k=>!QQ[k].p&&QQ[k].c!=='u'&&QQ[k].l===x);
     const cu=QQ.map((q,k)=>q.c==='u'&&lvOf(q)===x?k:-1).filter(k=>k>=0);
-    const pp=packK.slice(0,draw[x]);
-    const mix=[...pp,...baseK.slice(0,Math.max(0,draw[x]-pp.length)),...cu];
+    const pp=part(packK,packK.length?Math.max(1,Math.min(Math.ceil(draw[x]/2),Math.floor(packK.length/2))):0);   /* pack questions: up to half of the level (and at most half of the pack's pool, so two games in a row do not overlap); the rest comes from the general bank */
+    const mix=[...pp,...part(baseK,Math.max(0,draw[x]-pp.length)),...cu];
     return sh(mix.length,S.sd+x*17).map(i=>mix[i]);
   });
   const out=[];let n=0;
@@ -63,8 +70,10 @@ function itemsOf(){
   return out;
 }
 const cur=()=>itemsOf()[S.i];
-const fpick=(Lv,fo)=>{const p=FL[Lv];return FB[p[sh(p.length,S.sd+7)[fo%p.length]]]};  /* -> [arabic, english] */
+const fpick=(Lv,fo)=>{const p=olE()?[...FL[Lv].filter(i=>!FB_ACT.has(i)),...FB_ON[Lv]]:FL[Lv];return FB[p[sh(p.length,S.sd+7)[fo%p.length]]]};  /* -> [arabic, english] */
 const tmax=()=>(pkE()==='quick'?15:30)*(R?3:1);
+/* online question answered in writing: after the answer is done, the OTHER player taps "read" and the turn passes to them */
+const rdFlow=it=>!!R&&!!it&&it.j===undefined&&S.fo==null&&!S.sx;
 function phase(){if(!S.fl)return'flip';if(!S.dn)return'answer';return'next'}
 
 /* ---- persistence (this browser only) ---- */
@@ -80,7 +89,7 @@ function load(){
     if(Array.isArray(o.gd))GD=[o.gd[0]==='f'?'f':'m',o.gd[1]==='f'?'f':'m'];
     if(Array.isArray(o.gm))GM=[o.gm[0]===true,o.gm[1]===true];
     myG=o.mg==='f'?'f':'m';myGM=o.mgm===true;
-    MS=typeof o.ms==='string'?o.ms.replace(/[^a-z0-9]/g,'').slice(0,10):'';
+    MS='';   /* the shared-code way was removed; ignore anything saved by older versions */
     if(Array.isArray(o.rx))RXC=[Math.max(0,+o.rx[0]||0),Math.max(0,+o.rx[1]||0)];
     if(!GM[0])GD[0]=gGuess($('n0').value);if(!GM[1])GD[1]=gGuess($('n1').value);if(!myGM)myG=gGuess($('myn').value);
     AN=typeof o.at==='string'?o.at.slice(0,400):'';$('at').value=AN;
