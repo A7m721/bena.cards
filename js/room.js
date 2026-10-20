@@ -16,7 +16,7 @@ async function fbReq(method,path,body,q){
 }
 function roomErr(e,quiet){
   const msg=e&&e.denied?T('roomDenied'):T('roomFail');
-  if(!quiet){rmsg(msg);const m=$('manual');if(m)m.open=true}
+  if(!quiet)rmsg(msg)
   else if(R&&R.mode==='fb')rmsg(T('roomWeak'));
 }
 const rcode=()=>{const a='abcdefghjkmnpqrstuvwxyz23456789';let c='';for(let i=0;i<5;i++)c+=a[Math.floor(Math.random()*a.length)];return c};
@@ -81,7 +81,7 @@ function fbStream(){
   es.addEventListener('put',e=>fbEvent('put',e.data));
   es.addEventListener('patch',e=>fbEvent('patch',e.data));
   es.addEventListener('keep-alive',()=>{RM.lastEv=Date.now()});
-  es.addEventListener('cancel',()=>{rmsg(T('roomDenied'));$('manual').open=true});
+  es.addEventListener('cancel',()=>{rmsg(T('roomDenied'))});
   es.addEventListener('auth_revoked',()=>{rmsg(T('roomDenied'))});
   es.onerror=()=>{if(es.readyState===2&&RM.es===es)setTimeout(()=>{if(R&&R.mode==='fb'&&RM.es===es)fbStream()},3000)};
 }
