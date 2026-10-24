@@ -1,4 +1,5 @@
 /* Start-up and event wiring. Loaded last. */
+const HUB_URL='https://bena-games.vercel.app/';   /* link to the games hub page. Leave it empty and the back button stays hidden. */
 function bindGame(){
   card.addEventListener('click',()=>{if(phase()==='flip'&&canAct())act({...FR(),fl:true})});
   sk.addEventListener('click',()=>{const it=cur();if(canAct()&&it&&it.j===undefined&&S.fl&&S.fo==null&&!S.dn&&!S.sx)act({fo:S.fc,fc:S.fc+1})});
@@ -61,6 +62,7 @@ function bindChrome(){
 }
 
 function init(){
+  if(HUB_URL){['hubl','hubh'].forEach(id=>{const a=$(id);a.href=HUB_URL;a.hidden=false})}
   try{THEME=localStorage.getItem('bena_theme')||'classic'}catch(e){}
   if(!THEMES.includes(THEME))THEME='classic';
   load();applyLang();applyTheme();buildChips();
