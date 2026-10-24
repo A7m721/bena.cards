@@ -181,5 +181,7 @@ textarea:focus-visible{outline:3px solid var(--pink)}
 #home .lobby{margin-top:6px}
 /* home screen: no player-name bar (it appears once the game starts) */
 #players.idle{display:none}
+a.gm{text-decoration:none}
+#drawer #hubl{margin-bottom:6px}
 /* room for the always-visible settings button */
 main#app{padding-top:40px}
